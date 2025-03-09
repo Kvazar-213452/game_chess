@@ -29,7 +29,11 @@ def handle_button_click(event, card, board):
             if button["rect"].collidepoint(event.pos):
                 print(f"Натиснуто на кнопку: {button['label']}")
                 button["function"]()
-                card.remove_card(button['label'])
+                if button['label'] == "beck":
+                    if card.let_card_back == 0:
+                        card.remove_card(button['label'])
+                else:
+                    card.remove_card(button['label'])
 
 def display_status(status):
     text = font.render(f"Статус: {status}", True, (0, 0, 0))
@@ -53,6 +57,7 @@ def receive_updates(client_socket, board, card):
 
                 board.board = json.loads(data1[1])
                 board.current_turn = data1[2]
+                card.let_card_back = data1[3]
                 print("updata")
 
                 if let_card_course == 2:

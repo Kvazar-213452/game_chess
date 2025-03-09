@@ -6,10 +6,11 @@ from src.card.CardFunc import CardFunc
 class Card:
     def __init__(self, board):
         self.card_list = [
-            ["beck", partial(CardFunc.beck_func, board)],
-            ["block", partial(CardFunc.block_func, board)]
+            ["beck", partial(CardFunc.back_func, board, self)],
+            ["block", partial(CardFunc.block_func, board, self)]
         ]
         
+        self.let_card_back = 0
         self.card_user = []
         self.buttons = []
         self.button_y_position = 50
